@@ -16,12 +16,12 @@
   <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?search={{ search }}">
+                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
                     最新
                 </a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}">
+                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
                     最热
                 </a>
             </li>
@@ -55,30 +55,81 @@
     {% endif %}
 
     <div class="row mt-2">
-        {% for article in articles %}
-        <!-- 文章内容 -->
-        <div class="col-4 mb-4">
-        <!-- 卡片容器 -->
-            <div class="card h-100">
-                <!-- 标题 -->
-                <h4 class="card-header">{{ article.title }}</h4>
-                <!-- 摘要 -->
-                <div class="card-body">
-                    <p class="card-text">{{ article.body|slice:'100' }}...</p>
-                </div>
-                <!-- 注脚 -->
-                <div class="card-footer">
-                    <a href="{% url 'article:article_detail' article.id %}" class="btn btn-primary">阅读本文</a>
-                    <!-- 显示浏览量 -->
-                      <span>
-                          <small class="col align-self-end" style="color: gray;">
-                              浏览: {{ article.total_views }}
-                          </small>
-                      </span>
-                </div>
+      {% for article in articles %}
+      <!-- 标题图 -->
+        {% if article.avatar %}
+            <div class="col-3">
+                <img src="{{ article.avatar.url }}"
+                     alt="avatar"
+                     style="max-width:100%; border-radius: 20px"
+                >
             </div>
-        </div>
-        {% endfor %}
+        {% endif %}
+
+      <!-- 文章内容 -->
+      <div class="col">
+          <!-- 栏目 -->
+          {% if article.column %}
+              <button type="button"
+                  class="btn btn-sm mb-2
+                      {% if article.column.title == 'Academic' %}
+                          btn-success
+                      {% elif article.column.title == 'Technology' %}
+                          btn-danger
+                      {% elif article.column.title == 'HTML' %}
+                          btn-warning
+                      {% endif %}
+                  "
+              >
+                  {{ article.column }}
+              </button>
+          {% endif %}
+          <!-- 标签 -->
+            <span>
+                {% for tag in article.tags.all %}
+                    <a href="{% url 'article:article_list' %}?tag={{ tag }}"
+                       class="badge badge-secondary"
+                    >
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+            </span>
+          <!-- 标题 -->
+          <h4>
+              <b>
+                  <a href="{% url 'article:article_detail' article.id %}"
+                     style="color: black;"
+                  >
+                      {{ article.title }}
+                  </a>
+              </b>
+          </h4>
+          <!-- 摘要 -->
+          <div>
+              <p style="color: gray;">
+                  {{ article.body|slice:'100' }}...
+              </p>
+          </div>
+          <!-- 注脚 -->
+          <p>
+              <!-- 附加信息 -->
+              <span style="color: green;">
+                  <i class="fas fa-eye" style="color: lightskyblue;"></i>
+                  {{ article.total_views }} 浏览&nbsp;&nbsp;&nbsp;
+              </span>
+              <span style="color: blue;">
+                <i class="fas fa-comments" style="color: yellowgreen;"></i>
+                  {{ article.created|date:'Y-m-d' }} 发布&nbsp;&nbsp;&nbsp;
+              </span>
+              <span style="color: darkred;">
+                <i class="fas fa-clock" style="color: pink;"></i>
+                  {{ article.updated|date:'Y-m-d' }} 更新
+              </span>
+          </p>
+          <hr>
+      </div>
+      <hr style="width: 100%;"/>
+  {% endfor %}
 
     </div>
 </div>
@@ -89,11 +140,11 @@
         <span class="step-links">
             <!-- 如果不是第一页，则显示上翻按钮 -->
             {% if articles.has_previous %}
-                <a href="?page=1&order={{ order }}&search={{ search }}" class="btn btn-success">
+                <a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}" class="btn btn-success">
                     &laquo; 1
                 </a>
                 <span>...</span>
-                <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}"
+                <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
                    class="btn btn-secondary"
                 >
                     {{ articles.previous_page_number }}
@@ -107,13 +158,13 @@
 
             <!-- 如果不是最末页，则显示下翻按钮 -->
             {% if articles.has_next %}
-                <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}"
+                <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
                    class="btn btn-secondary"
                 >
                     {{ articles.next_page_number }}
                 </a>
                 <span>...</span>
-                <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}"
+                <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
                    class="btn btn-success"
                 >
                     {{ articles.paginator.num_pages }} &raquo;

@@ -38,12 +38,10 @@
                             我也要发言：
                         </strong>
                     </label>
-                    <textarea
-                        type="text"
-                        class="form-control"
-                        id="body"
-                        name="body"
-                        rows="2"></textarea>
+                    <div>
+                        {{ comment_form.media }}
+                        {{ comment_form.body }}
+                    </div>
                 </div>
                 <!-- 提交按钮 -->
                 <button type="submit" class="btn btn-primary ">发送</button>
@@ -73,21 +71,40 @@
                     {{ comment.created|date:"Y-m-d H:i:s" }}
                 </span> 时说：
             </p>
-            <pre style="font-family: inherit; font-size: 1em;">
-{{ comment.body }}</pre>
+            <div>
+             {{ comment.body|safe }}</div>
         {% endfor %}
     </div>
 
         </div>
 
         <!-- 新增的目录 -->
-        <div class="col-3 mt-4">
-            <h4><strong>目录</strong></h4>
-            <hr>
-            <div>
-                {{ toc|safe }}
+
+
+
+        <div class="col-3 mt-4" id="sidebar" class="sidebar">
+            <div class="sidebar__inner">
+                <h4><strong>目录</strong></h4>
+                <hr>
+                <div>
+                    {{ toc|safe }}
+                </div>
             </div>
         </div>
+
+        <!-- 粘性侧边栏样式 -->
+        <style>
+            .sidebar{
+                will-change: min-height;
+            }
+
+            .sidebar__inner{
+                transform: translate(0, 0);
+                transform: translate3d(0, 0, 0);
+                will-change: position, transform;
+            }
+        </style>
+
 
     </div>
 </div>
@@ -137,5 +154,19 @@
         })
     }
 </script>
-
 {% endblock content %}
+
+{% block script %}
+<!-- 引入粘性侧边栏 -->
+<script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
+<script type="text/javascript">
+    $('#sidebar').stickySidebar({
+        topSpacing: 20,
+        bottomSpacing: 20,
+    });
+</script>
+
+<script>
+    $(".django-ckeditor-widget").removeAttr('style');
+</script>
+{% endblock script %}
