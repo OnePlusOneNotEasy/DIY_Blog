@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pvwh^23z@7c%m^(k(!+6dx46hk^=d$2&etl-y#c-m!1hx1v9l1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'password_reset',
@@ -43,6 +44,14 @@ INSTALLED_APPS = [
     'comment',
     'taggit',
     'ckeditor',
+    'mptt',
+    'notifications',
+    'notice',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 可添加需要的第三方登录
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +77,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # allauth 启动必须项
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -135,6 +146,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    # Django 后台可独立于 allauth 登录
+    'django.contrib.auth.backends.ModelBackend',
+
+    # 配置 allauth 独有的认证方法，如 email 登录
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -148,11 +167,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+# 设置站点
+SITE_ID = 1
+
+# 登录成功后重定向地址
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = '/home/yangjiale/Desktop/development/blog_project/collected_static'
+# STATIC_ROOT = '/Users/jialeyang/Development/my_blog/my_blog/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -171,4 +195,4 @@ EMAIL_USE_SSL = True
 # 默认的发件人
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/yangjiale/Desktop/development/blog_project/collected_media'
+MEDIA_ROOT = '/Users/jialeyang/Development/my_blog/my_blog/media'
