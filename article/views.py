@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import ArticlePost, ArticleColumn
 import markdown
+from mdx_math import MathExtension
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -25,6 +26,15 @@ def article_detail(request, id):
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
         'markdown.extensions.toc',
+        'markdown.extensions.wikilinks',
+        'markdown.extensions.smarty',
+        'markdown.extensions.sane_lists',
+        'markdown.extensions.nl2br',
+        'markdown.extensions.meta',
+        'markdown.extensions.legacy_em',
+        'markdown.extensions.legacy_attrs',
+        'markdown.extensions.admonition',
+        MathExtension(enable_dollar_delimiter=True)
         ]
     )
     article.body = md.convert(article.body)
