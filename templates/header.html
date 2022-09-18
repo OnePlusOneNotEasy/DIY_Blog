@@ -1,28 +1,44 @@
 <!-- 引入notifications的模板标签 -->
 {% load notifications_tags %}
 {% notifications_unread as unread_count %}
+{% load static %}
+
+
+
+
+
+<!-- 页面第一栏头像设计 -->
+<div class="header" style="  background-color: #32435f; padding: 5px; text-align: center;">
+  <img src= {% static 'logo/logo.png' %} class="rounded-circle img-zoomable" style="height:50px; border: 2px solid #e1dcd9; padding: 2px" alt="Mr. Yang">
+  <svg id="heart" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-suit-heart-fill text-danger" viewBox="0 0 16 16">
+    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+  </svg>
+  <img src= {% static 'logo/logo1.png' %} class="rounded-circle img-zoomable" style="height:50px; border: 2px solid #e1dcd9; padding: 2px" alt="Miss. He">
+</div>
+
 
 <!-- 定义导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+<div class="row" style="background-color: #32435f; ">
+  <div class="col-3"></div>
+  <nav class="col-6 navbar navbar-expand-lg navbar-dark" style="background-color: #32435f; border:2px solid white; margin:2px">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
-    <!-- 导航栏商标 -->
-    <a class="navbar-brand" href="#">我的博客</a>
 
-    <!-- 导航入口 -->
-    <div>
       <ul class="navbar-nav">
         <!-- 条目 -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'article:article_list' %}">所有文章</a>
+        <li class="nav-item myNav">
+          <a class="nav-link"  href="{% url 'article:article_list' %}">所有文章</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item myNav" >
           <a class="nav-link" href="{% url 'article:article_create' %}">新建文章</a>
         </li>
         <!-- Django的 if 模板语句 -->
         {% if user.is_authenticated %}
         <!-- 如果用户已经登录，则显示用户名下拉框 -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown myNav">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <!-- 新增代码，小红点 -->
                       {% if unread_count %}
@@ -74,19 +90,17 @@
                         })
                     }
                 </script>
-            {% endif %}
+        {% endif %}
         </li>
         <!-- 如果用户未登录，则显示 “登录” -->
         {% else %}
-        <li class="nav-item">
+        <li class="nav-item myNav">
             <a class="nav-link" href="{% url 'userprofile:login' %}">登录</a>
         </li>
         <!-- if 语句在这里结束 -->
          {% endif %}
-
-
       </ul>
     </div>
-
-  </div>
-</nav>
+  </nav>
+  <div class="col-3"></div>
+</div>

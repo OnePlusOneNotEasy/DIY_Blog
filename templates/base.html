@@ -16,42 +16,133 @@
     <!-- 预留网站标题的位置 -->
     <title>{% block title %}{% endblock %}</title>
     <!-- 引入bootstrap的css文件 -->
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
     <!-- 引入monikai.css -->
-    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}"> -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"
     >
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> -->
 
-<body>
-    <!-- 引入导航栏 -->
-    {% include 'header.html' %}
-    <!-- 预留具体页面的位置 -->
-    <!-- 新增两个 div 容器 -->
-    <div id="wrapper">
-        {% block content %}{% endblock content %}
-        <div id="push"></div>
-    </div>
-    <!-- 引入注脚 -->
-    {% include 'footer.html' %}
-    <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
-    <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
-    <!-- 引入layer.js -->
-    <script src="{% static 'layer/layer.js' %}"></script>
-    <!--
-        popper.js 采用 cdn 远程引入，意思是你不需要把它下载到本地。
-        在实际的开发中推荐静态文件尽量都使用 cdn 的形式。
-        教程采用本地引入是为了让读者了解静态文件本地部署的流程。
-    -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js"></script>
+    <!-- 注释之后头像栏不动 -->
+    <style>
+      #heart{
+        width: 30px;
+        height: 30px;
+        animation-name: heart_beat;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+      }
+      @keyframes heart_beat{
+        0%   {opacity:0.25; width:30px; height:30px;}
+        100% {opacity:1; width:45px; height:45px;}
+      }
+      @-webkit-keyframes heart_beat{
+        0%   {opacity:0.25; width:30px; height:30px;}
+        100% {opacity:1; width:45px; height:45px;}
+      }
+    </style>
 
-    <!-- 引入bootstrap的js文件 -->
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    {% block script %}{% endblock script %}
-    {% include 'back_to_top_func.html'%}
-    <!-- 增加样式 -->
+    <!-- 图像放大显示 -->
+    <style>
+      .img-zoomable {
+          cursor: pointer;
+          transition: 0.3s;
+      }
+
+      .img-zoomable:hover {opacity: 0.7;}
+
+      /* The Modal (background) */
+      .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(225, 220, 217); /* Fallback color */
+          background-color: rgba(225, 220, 217, 0.5); /* Mashroom w/ opacity */
+      }
+
+      /* Modal Content (image) */
+      .modal-content {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+      }
+
+      /* Caption of Modal Image */
+      #ModalCaption {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+          text-align: center;
+          color: #000;
+          font-size: 45px;
+          padding: 10px 0;
+          height: 150px;
+
+      }
+
+      /* Add Animation */
+      .modal-content, #ModalCaption {
+          -webkit-animation-name: zoom;
+          -webkit-animation-duration: 0.6s;
+          animation-name: zoom;
+          animation-duration: 0.6s;
+      }
+
+      @-webkit-keyframes zoom {
+          from {-webkit-transform: scale(0)}
+          to {-webkit-transform: scale(1)}
+      }
+
+      @keyframes zoom {
+          from {transform: scale(0.1)}
+          to {transform: scale(1)}
+      }
+
+      /* The Close Button */
+      .close {
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #32435f;
+          font-size: 40px;
+          font-weight: bold;
+          transition: 0.3s;
+      }
+
+      .close:hover,
+      .close:focus {
+          color: #bbb;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      /* 100% Image Width on Smaller Screens */
+      @media only screen and (max-width: 700px){
+          .modal-content {
+              width: 100%;
+          }
+      }
+      </style>
+
+      <!-- 整体样式 -->
       <style>
           html, body {
               height: 100%;
@@ -68,6 +159,96 @@
               height: 60px;
           }
       </style>
+
+      <!-- 导航按钮 -->
+      <style>
+          .myNav{
+              font-family: SimSun;
+              border: 0px solid white;
+              font-size: 20px;
+              transition: border font-size 0.3s;
+          }
+          .myNav:hover{
+            border: 1px solid white;
+            font-size: 25px;
+          }
+      </style>
+
+      <!-- row高度相同 -->
+      <style>
+          .row-same-height {
+              overflow：hidden;
+          }
+          .row-same-height>div {
+              margin-bottom：-2000px！important;
+              padding-bottom：2000px！important;
+          }
+      </style>
+
+
+
+
+
+</head>
+
+<body >
+  <!-- 模态窗口 -->
+  <div id="MyModal" class="modal">
+    <span class="close">×</span>
+    <img class="modal-content">
+    <div id="ModalCaption"></div>
+  </div>
+  <!-- 引入导航栏 -->
+  {% include 'header.html' %}
+
+  <div id="wrapper" >
+    <div class="row">
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+  <!-- 引入注脚 -->
+  {% include 'footer.html' %}
+
+
+    <!-- script -->
+    <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
+    <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+    <!-- 引入layer.js -->
+    <script src="{% static 'layer/layer.js' %}"></script>
+    <!--
+        popper.js 采用 cdn 远程引入，意思是你不需要把它下载到本地。
+        在实际的开发中推荐静态文件尽量都使用 cdn 的形式。
+        教程采用本地引入是为了让读者了解静态文件本地部署的流程。
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block script %}{% endblock script %}
+    {% include 'back_to_top_func.html'%}
+    <script>
+      // 获取模态窗口
+      var img_list = document.getElementsByClassName('img-zoomable')
+      var img_length = img_list.length
+      var modal = document.getElementById('MyModal')
+      var modal_img = modal.getElementsByTagName('img')[0]
+      var modal_captionText = modal.getElementsByTagName('div')[0]
+      for(var i = 0; i < img_length; i++){
+        var img = img_list[i]
+
+        img.onclick = function(){
+          modal.style.display = "block";
+          modal_img.src = this.src
+          modal_img.alt = this.alt
+          modal_captionText.innerHTML = this.alt
+        }
+      }
+      // 获取 <span> 元素，设置关闭模态框按钮
+      var close_span = modal.getElementsByTagName('span')[0];
+      // 点击 <span> 元素上的 (x), 关闭模态框
+      close_span.onclick = function() {
+        modal.style.display = "none";
+      }
+    </script>
 </body>
 
 </html>
