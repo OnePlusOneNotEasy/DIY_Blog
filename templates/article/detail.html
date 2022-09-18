@@ -18,10 +18,10 @@
       <div class="container">
           <div class="row">
               <!-- 标题及作者 -->
-              <div class="col-9">
+              <div class="col-9" style="text-align:center; color:white;">
 
-              <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-              <div class="col-12 alert alert-success">
+              <h1 class="col-12 mt-4 mb-4" >{{ article.title }}</h1>
+              <div class="col-12">
                 作者：{{ article.author }}</div>
               <!-- 文章正文 -->
               <div class="col-12">
@@ -43,13 +43,15 @@
                                   我也要发言：
                               </strong>
                           </label>
+                          <br><br>
                           <div>
                               {{ comment_form.media }}
                               {{ comment_form.body }}
                           </div>
                       </div>
+                      <br>
                       <!-- 提交按钮 -->
-                      <button type="submit" class="btn btn-primary ">发送</button>
+                      <button type="submit" class="btn btn-outline-primary ">发送</button>
                   </form>
               </div>
               <br>
@@ -151,11 +153,64 @@
                   {% endwith %}
               {% endrecursetree %}
           </div>
+          <!-- 文章详情 -->
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-3">
 
+                  </div>
+
+                  <div class="col-sm-6 ">
+                    <div>
+                        {% if user == article.author %}
+                        <a href="#" onclick="confirm_safe_delete()">删除文章</a>
+                        <a href="{% url "article:article_update" article.id %}">编辑文章</a>
+                        {% endif %}
+                        <form
+                            style="display:none;"
+                            id="safe_delete"
+                            action="{% url 'article:article_safe_delete' article.id %}"
+                            method="POST">{% csrf_token %}
+                            <button type="submit">发送</button>
+                        </form>
+                      </div>
+                      <div>
+                        浏览：{{ article.total_views }}
+                      </div>
+
+                  </div>
+
+              </div>
+          </div>
+
+          <script>
+              // 删除文章的函数
+              function confirm_safe_delete() {
+                  // 调用layer弹窗组件
+                  layer.open({
+                      // 弹窗标题
+                      title: "确认删除",
+                      // 正文
+                      content: "确认删除这篇文章吗？",
+                      // 点击确定按钮后调用的回调函数
+                      yes: function(index, layero) {
+                          // 指定应当前往的 url
+                          $('form#safe_delete button').click();
+                          layer.close(index);
+                      },
+                  })
+              }
+          </script>
 
           </div>
+
+
+
+
+
+
               <!-- 新增的目录 -->
-              <div class="col-3 mt-4" id="sidebar" class="sidebar">
+              <div class="col-3 mt-4" id="sidebar" class="sidebar" style="text-align:center; color:white;">
                   <div class="sidebar__inner">
                       <h4><strong>目录</strong></h4>
                       <hr>
@@ -188,54 +243,7 @@
 </div>
 
 
-<!-- 文章详情 -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
 
-        </div>
-
-        <div class="col-sm-6 alert alert-success">
-          <div>
-              {% if user == article.author %}
-              <a href="#" onclick="confirm_safe_delete()">删除文章</a>
-              <a href="{% url "article:article_update" article.id %}">编辑文章</a>
-              {% endif %}
-              <form
-                  style="display:none;"
-                  id="safe_delete"
-                  action="{% url 'article:article_safe_delete' article.id %}"
-                  method="POST">{% csrf_token %}
-                  <button type="submit">发送</button>
-              </form>
-            </div>
-            <div>
-              浏览：{{ article.total_views }}
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<script>
-    // 删除文章的函数
-    function confirm_safe_delete() {
-        // 调用layer弹窗组件
-        layer.open({
-            // 弹窗标题
-            title: "确认删除",
-            // 正文
-            content: "确认删除这篇文章吗？",
-            // 点击确定按钮后调用的回调函数
-            yes: function(index, layero) {
-                // 指定应当前往的 url
-                $('form#safe_delete button').click();
-                layer.close(index);
-            },
-        })
-    }
-</script>
 {% endblock content %}
 
 {% block script %}

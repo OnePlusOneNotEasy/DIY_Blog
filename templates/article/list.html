@@ -53,7 +53,7 @@
       </div>
 
       <!-- 搜索提示语 -->
-      <div class="row">
+      <div class="row" style="color:rgb(255,255,255)">
         {% if search %}
             {% if articles %}
                 <h4><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
@@ -88,14 +88,7 @@
             <!-- 栏目 -->
             {% if article.column %}
                 <button type="button"
-                    class="btn btn mb-2
-                        {% if article.column.title == 'Life' %}
-                            btn-success
-                        {% elif article.column.title == 'Tech' %}
-                            btn-danger
-                        {% elif article.column.title == 'Acad' %}
-                            btn-warning
-                        {% endif %}
+                    class="btn mb-2 btn-outline-warning
                     "
                 >
                     {{ article.column }}
@@ -104,9 +97,8 @@
             <!-- 标签 -->
               <span>
                   {% for tag in article.tags.all %}
-                      <a href="{% url 'article:article_list' %}?tag={{ tag }}"
-                         class="btn-sm mb-2 btn-info"
-                      >
+
+                      <a href="{% url 'article:article_list' %}?tag={{ tag }}" class="btn btn-sm btn-outline-dark">
                           {{ tag }}
                       </a>
                   {% endfor %}
@@ -115,7 +107,7 @@
             <h4>
                 <b>
                     <a href="{% url 'article:article_detail' article.id %}"
-                       style="color: black;"
+                       style="color: white;"
                     >
                         {{ article.title }}
                     </a>
@@ -123,23 +115,23 @@
             </h4>
             <!-- 摘要 -->
             <div>
-                <p style="color: gray;">
+                <p style="color: white;">
                     {{ article.body|slice:'100' }}...
                 </p>
             </div>
             <!-- 注脚 -->
             <p>
                 <!-- 附加信息 -->
-                <span style="color: green;">
-                    <i class="fas fa-eye" style="color: lightskyblue;"></i>
+                <span style="color: white;">
+                    <i class="fas fa-eye" style="color: white;"></i>
                     {{ article.total_views }} 浏览&nbsp;&nbsp;&nbsp;
                 </span>
-                <span style="color: blue;">
-                  <i class="fas fa-comments" style="color: yellowgreen;"></i>
+                <span style="color: white;">
+                  <i class="fas fa-comments" style="color: white;"></i>
                     {{ article.created|date:'Y-m-d' }} 发布&nbsp;&nbsp;&nbsp;
                 </span>
-                <span style="color: darkred;">
-                  <i class="fas fa-clock" style="color: pink;"></i>
+                <span style="color: white;">
+                  <i class="fas fa-clock" style="color: white;"></i>
                     {{ article.updated|date:'Y-m-d' }} 更新
                 </span>
             </p>
@@ -153,32 +145,32 @@
               <span class="step-links">
                   <!-- 如果不是第一页，则显示上翻按钮 -->
                   {% if articles.has_previous %}
-                      <a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}" class="btn btn-success">
+                      <a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}" class="btn btn-outline-light">
                           &laquo; 1
                       </a>
                       <span>...</span>
                       <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
-                         class="btn btn-secondary"
+                         class="btn btn-outline-light"
                       >
                           {{ articles.previous_page_number }}
                       </a>
                   {% endif %}
 
                   <!-- 当前页面 -->
-                  <span class="current btn btn-danger btn-lg">
+                  <span class="current btn btn-light btn-lg">
                       {{ articles.number }}
                   </span>
 
                   <!-- 如果不是最末页，则显示下翻按钮 -->
                   {% if articles.has_next %}
                       <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
-                         class="btn btn-secondary"
+                         class="btn btn-outline-light"
                       >
                           {{ articles.next_page_number }}
                       </a>
                       <span>...</span>
                       <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
-                         class="btn btn-success"
+                         class="btn btn-outline-light"
                       >
                           {{ articles.paginator.num_pages }} &raquo;
                       </a>
