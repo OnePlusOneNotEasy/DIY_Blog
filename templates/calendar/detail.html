@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- calender样式 -->
+    <link rel="stylesheet" href="{% static 'calendar/calendar_style.css' %}">
+
+  <body>
+    <div class="clearfix">
+    	<a class="btn btn-info left" href="{% url 'calendar:calendar_detail' %}?{{ prev_month }}"> Previous Month </a>
+    	<a class="btn btn-info right" href="{% url 'calendar:calendar_detail' %}?{{ next_month }}"> Next Month </a>
+    </div>
+    {{ calendar }}
+  </body>
+</html>

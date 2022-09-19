@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'mptt',
     'notifications',
     'notice',
+    'my_calendar',
 ]
 
 MIDDLEWARE = [
@@ -163,7 +164,7 @@ LOGIN_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = '/home/yangjiale/Desktop/development/blog_project/collected_static'
+STATIC_ROOT = '../collected_static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -182,4 +183,4 @@ EMAIL_USE_SSL = True
 # 默认的发件人
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/yangjiale/Desktop/development/blog_project/collected_media'
+MEDIA_ROOT = '../collected_media'

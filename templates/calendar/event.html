@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+日程
+{% endblock %}
+
+{% block content %}
+<style>
+  .form {
+    margin: auto;
+  }
+
+  .form input, .form select, .form textarea {
+    border-radius: 5px;
+    border: 1px solid #17a2b8;
+    outline: none;
+    background: none;
+    padding: 5px;
+    width: 100%;
+  }
+</style>
+<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'calendar:calendar_detail' %}"> Calendar </a>
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  <table class="form form-table">
+    {{ form }}
+    <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+  </table>
+</form>
+{% endblock %}
