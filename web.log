@@ -1,0 +1,112 @@
+nohup: ignoring input
+[uWSGI] getting INI configuration from uwsgi.ini
+*** Starting uWSGI 2.0.20 (64bit) on [Mon Sep 19 10:53:14 2022] ***
+compiled with version: 9.4.0 on 15 September 2022 17:22:23
+os: Linux-5.15.0-46-generic #49~20.04.1-Ubuntu SMP Thu Aug 4 19:15:44 UTC 2022
+nodename: yangjiale-GPU-Server
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 16
+current working directory: /home/yangjiale/Desktop/development/blog_project/DIY_Blog
+detected binary path: /home/yangjiale/Desktop/development/blog_project/bin/uwsgi
+chdir() to /home/yangjiale/Desktop/development/blog_project/DIY_Blog
+your processes number limit is 127520
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address :8099 fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+Python main interpreter initialized at 0x55e23c12b5e0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+setting request body buffering size to 32768 bytes
+mapped 3514674 bytes (3432 KB) for 25 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55e23c12b5e0 pid: 2898 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 2898)
+spawned uWSGI worker 1 (pid: 2901, cores: 5)
+spawned uWSGI worker 2 (pid: 2902, cores: 5)
+spawned uWSGI worker 3 (pid: 2907, cores: 5)
+spawned uWSGI worker 4 (pid: 2912, cores: 5)
+spawned uWSGI worker 5 (pid: 2917, cores: 5)
+[pid: 2917|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 915 bytes} [Mon Sep 19 02:53:29 2022] GET / => generated 25629 bytes in 43 msecs (HTTP/1.1 200) 5 headers in 293 bytes (1 switches on core 0)
+Not Found: /github.css
+[pid: 2917|app: 0|req: 2/2] 127.0.0.1 () {42 vars in 794 bytes} [Mon Sep 19 02:53:29 2022] GET /github.css => generated 2883 bytes in 6 msecs (HTTP/1.1 404) 3 headers in 102 bytes (1 switches on core 1)
+[pid: 2917|app: 0|req: 3/3] 127.0.0.1 () {44 vars in 915 bytes} [Mon Sep 19 02:53:31 2022] GET / => generated 25629 bytes in 17 msecs (HTTP/1.1 200) 5 headers in 293 bytes (1 switches on core 2)
+Not Found: /github.css
+[pid: 2917|app: 0|req: 4/4] 127.0.0.1 () {42 vars in 794 bytes} [Mon Sep 19 02:53:32 2022] GET /github.css => generated 2883 bytes in 5 msecs (HTTP/1.1 404) 3 headers in 102 bytes (1 switches on core 3)
+Gracefully killing worker 5 (pid: 2917)...
+Gracefully killing worker 4 (pid: 2912)...
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 2907)...
+Gracefully killing worker 2 (pid: 2902)...
+Gracefully killing worker 1 (pid: 2901)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /home/yangjiale/Desktop/development/blog_project/DIY_Blog
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (:8099)
+running /home/yangjiale/Desktop/development/blog_project/bin/uwsgi
+[uWSGI] getting INI configuration from uwsgi.ini
+*** Starting uWSGI 2.0.20 (64bit) on [Mon Sep 19 02:54:14 2022] ***
+compiled with version: 9.4.0 on 15 September 2022 17:22:23
+os: Linux-5.15.0-46-generic #49~20.04.1-Ubuntu SMP Thu Aug 4 19:15:44 UTC 2022
+nodename: yangjiale-GPU-Server
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 16
+current working directory: /home/yangjiale/Desktop/development/blog_project/DIY_Blog
+detected binary path: /home/yangjiale/Desktop/development/blog_project/bin/uwsgi
+chdir() to /home/yangjiale/Desktop/development/blog_project/DIY_Blog
+your processes number limit is 127520
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address :8099 fd 3
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+Python main interpreter initialized at 0x56263ce55330
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+setting request body buffering size to 32768 bytes
+mapped 3514674 bytes (3432 KB) for 25 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x56263ce55330 pid: 2898 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 2898)
+spawned uWSGI worker 1 (pid: 2963, cores: 5)
+spawned uWSGI worker 2 (pid: 2964, cores: 5)
+spawned uWSGI worker 3 (pid: 2969, cores: 5)
+spawned uWSGI worker 4 (pid: 2974, cores: 5)
+spawned uWSGI worker 5 (pid: 2979, cores: 5)
+[pid: 2979|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 908 bytes} [Mon Sep 19 02:58:28 2022] GET / => generated 22810 bytes in 40 msecs (HTTP/1.1 200) 4 headers in 196 bytes (1 switches on core 0)
+Mon Sep 19 03:01:16 2022 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Mon Sep 19 03:01:16 2022 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
