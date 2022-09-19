@@ -23,14 +23,15 @@ def post_comment(request, article_id, parent_comment_id=None):
             new_comment.user = request.user
 
             # 二级回复
+
+            parent_comment = Comment.objects.get(id=parent_comment_id)
             if parent_comment_id:
-                parent_comment = Comment.objects.get(id=parent_comment_id)
                 # 若回复层级超过二级，则转换为二级
                 new_comment.parent_id = parent_comment.get_root().id
                 # 被回复人
                 new_comment.reply_to = parent_comment.user
                 new_comment.save()
-                if not parent_comment.user.is_superuser:
+                if request.user != parent_comment.user:
                     notify.send(
                         request.user,
                         recipient=parent_comment.user,
@@ -42,10 +43,10 @@ def post_comment(request, article_id, parent_comment_id=None):
 
             new_comment.save()
             # 新增代码，给管理员发送通知
-            if not request.user.is_superuser:
+            if request.user != article.author:
                 notify.send(
                     request.user,
-                    recipient=User.objects.filter(is_superuser=1),
+                    recipient=article.author,
                     verb='回复了你',
                     target=article,
                     action_object=new_comment,
